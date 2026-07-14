@@ -1,0 +1,20 @@
+{
+    "command_response.lives": "Vieți rămase: {0}.",
+    "deathexile:command_response.exile_set": "Punct de exil setat: {0}, {1}, {2}.",
+    "deathexile:command_response.pardon_done": "Pedeapsa jucătorului {0} s-a încheiat.",
+    "deathexile:command_response.pardon_none": "{0} nu execută nicio pedeapsă în acest moment.",
+    "deathexile:command_response.pardon_notfound": "Jucătorul cu numele „{0}” nu a fost găsit.",
+    "deathexile:command_response.pardon_offline": "{0} este offline — pedeapsa se va încheia la următoarea conectare.",
+    "deathexile:command_response.pardon_offline_unavailable": "{0} este offline și datele sale nu sunt încărcate. Lasă-l să se conecteze mai întâi, apoi acordă iertarea.",
+    "deathexile:punish.exile_end": "Exilul tău s-a încheiat. Mori și revii la punctul de apariție. Vieți: {0}.",
+    "deathexile:punish.exile_remaining": "Timp rămas în exil: {0} h {1} min.",
+    "deathexile:punish.exile_start": "Ai fost exilat într-un loc îndepărtat pentru {0} h {1} min.",
+    "deathexile:punish.spectator_end": "Perioada de spectator s-a încheiat. Bine ai revenit în modul supraviețuire. Vieți: {0}.",
+    "deathexile:punish.spectator_remaining": "Timp rămas ca spectator: {0} h {1} min.",
+    "deathexile:punish.spectator_start": "Ai rămas fără vieți. Vei fi spectator timp de {0} h {1} min.",
+    "lives.added": "Acum ai {0} vieți.",
+    "lives.lost": "Ai murit. Vieți rămase: {0}.",
+    "logs.config_load_error": "Nu s-a putut încărca configurația! Vor fi folosite setările implicite.",
+    "respawn.spectator": "Ți-ai pierdut forma fizică. Acum ești doar un observator.",
+    "geartolife:command_response.lives": "Vieți rămase: {0}."
+}

@@ -1,0 +1,20 @@
+{
+    "command_response.lives": "Verbleibende Leben: {0}.",
+    "deathexile:command_response.exile_set": "Verbannungspunkt gesetzt: {0}, {1}, {2}.",
+    "deathexile:command_response.pardon_done": "Die Bestrafung von Spieler {0} wurde beendet.",
+    "deathexile:command_response.pardon_none": "{0} verbüßt derzeit keine Strafe.",
+    "deathexile:command_response.pardon_notfound": "Spieler mit dem Namen „{0}“ wurde nicht gefunden.",
+    "deathexile:command_response.pardon_offline": "{0} ist offline – die Bestrafung endet bei der nächsten Anmeldung.",
+    "deathexile:command_response.pardon_offline_unavailable": "{0} ist offline und seine Daten sind nicht geladen. Lass den Spieler zuerst beitreten und begnadige ihn dann.",
+    "deathexile:punish.exile_end": "Deine Verbannung ist beendet. Du stirbst und kehrst zum Spawn zurück. Leben: {0}.",
+    "deathexile:punish.exile_remaining": "Verbleibende Verbannungszeit: {0} Std. {1} Min.",
+    "deathexile:punish.exile_start": "Du wurdest für {0} Std. {1} Min. an einen weit entfernten Ort verbannt.",
+    "deathexile:punish.spectator_end": "Deine Zuschauerzeit ist vorbei. Willkommen zurück im Überlebensmodus. Leben: {0}.",
+    "deathexile:punish.spectator_remaining": "Verbleibende Zuschauerzeit: {0} Std. {1} Min.",
+    "deathexile:punish.spectator_start": "Dir sind die Leben ausgegangen. Du wirst {0} Std. {1} Min. lang Zuschauer sein.",
+    "lives.added": "Du hast jetzt {0} Leben.",
+    "lives.lost": "Du bist gestorben. Verbleibende Leben: {0}.",
+    "logs.config_load_error": "Konfiguration konnte nicht geladen werden! Stattdessen werden die Standardeinstellungen verwendet.",
+    "respawn.spectator": "Du hast deine physische Hülle verloren. Nun bist du nur noch ein Beobachter.",
+    "geartolife:command_response.lives": "Verbleibende Leben: {0}."
+}

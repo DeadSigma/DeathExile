@@ -1,0 +1,20 @@
+{
+    "command_response.lives": "Pozostało żyć: {0}.",
+    "deathexile:command_response.exile_set": "Ustawiono punkt wygnania: {0}, {1}, {2}.",
+    "deathexile:command_response.pardon_done": "Kara gracza {0} została zakończona.",
+    "deathexile:command_response.pardon_none": "{0} obecnie nie odbywa żadnej kary.",
+    "deathexile:command_response.pardon_notfound": "Nie znaleziono gracza o nazwie „{0}”.",
+    "deathexile:command_response.pardon_offline": "{0} jest offline — kara zakończy się przy następnym logowaniu.",
+    "deathexile:command_response.pardon_offline_unavailable": "{0} jest offline, a jego dane nie są wczytane. Niech najpierw dołączy, a potem udziel mu ułaskawienia.",
+    "deathexile:punish.exile_end": "Twoje wygnanie dobiegło końca. Umierasz i wracasz do miejsca odrodzenia. Życia: {0}.",
+    "deathexile:punish.exile_remaining": "Pozostały czas wygnania: {0} godz. {1} min.",
+    "deathexile:punish.exile_start": "Zostałeś wygnany w odległe miejsce na {0} godz. {1} min.",
+    "deathexile:punish.spectator_end": "Czas obserwatora dobiegł końca. Witamy z powrotem w trybie przetrwania. Życia: {0}.",
+    "deathexile:punish.spectator_remaining": "Pozostały czas obserwatora: {0} godz. {1} min.",
+    "deathexile:punish.spectator_start": "Skończyły ci się życia. Będziesz obserwatorem przez {0} godz. {1} min.",
+    "lives.added": "Masz teraz {0} żyć.",
+    "lives.lost": "Zginąłeś. Pozostało żyć: {0}.",
+    "logs.config_load_error": "Nie udało się wczytać konfiguracji! Zostaną użyte ustawienia domyślne.",
+    "respawn.spectator": "Utraciłeś swoją fizyczną postać. Jesteś teraz jedynie obserwatorem.",
+    "geartolife:command_response.lives": "Pozostało żyć: {0}."
+}

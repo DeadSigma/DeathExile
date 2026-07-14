@@ -1,0 +1,20 @@
+{
+    "command_response.lives": "残りライフ: {0}。",
+    "deathexile:command_response.exile_set": "追放地点を設定しました: {0}, {1}, {2}.",
+    "deathexile:command_response.pardon_done": "プレイヤー {0} の処罰が終了しました。",
+    "deathexile:command_response.pardon_none": "{0} は現在処罰を受けていません。",
+    "deathexile:command_response.pardon_notfound": "名前「{0}」のプレイヤーは見つかりませんでした。",
+    "deathexile:command_response.pardon_offline": "{0} はオフラインです。処罰は次回ログイン時に終了します。",
+    "deathexile:command_response.pardon_offline_unavailable": "{0} はオフラインで、データが読み込まれていません。先にログインさせてから恩赦を与えてください。",
+    "deathexile:punish.exile_end": "追放が終了しました。死亡してスポーン地点へ戻ります。ライフ: {0}。",
+    "deathexile:punish.exile_remaining": "追放の残り時間: {0}時間{1}分。",
+    "deathexile:punish.exile_start": "{0}時間{1}分の間、遠くの地へ追放されました。",
+    "deathexile:punish.spectator_end": "観戦時間が終了しました。サバイバルへようこそ。ライフ: {0}。",
+    "deathexile:punish.spectator_remaining": "観戦者の残り時間: {0}時間{1}分。",
+    "deathexile:punish.spectator_start": "ライフがなくなりました。{0}時間{1}分の間、観戦者になります。",
+    "lives.added": "現在の残りライフは {0} です。",
+    "lives.lost": "死亡しました。残りライフ: {0}。",
+    "logs.config_load_error": "設定の読み込みに失敗しました。代わりにデフォルト設定を読み込みます。",
+    "respawn.spectator": "あなたは肉体を失いました。今やただの観察者です。",
+    "geartolife:command_response.lives": "残りライフ: {0}。"
+}

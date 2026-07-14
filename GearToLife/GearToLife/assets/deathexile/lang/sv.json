@@ -1,0 +1,20 @@
+{
+    "command_response.lives": "Återstående liv: {0}.",
+    "deathexile:command_response.exile_set": "Exilpunkt satt till: {0}, {1}, {2}.",
+    "deathexile:command_response.pardon_done": "Straffet för spelaren {0} har avslutats.",
+    "deathexile:command_response.pardon_none": "{0} avtjänar inget straff för närvarande.",
+    "deathexile:command_response.pardon_notfound": "Ingen spelare med namnet ”{0}” hittades.",
+    "deathexile:command_response.pardon_offline": "{0} är offline – straffet avslutas nästa gång spelaren ansluter.",
+    "deathexile:command_response.pardon_offline_unavailable": "{0} är offline och spelarens data är inte inlästa. Låt spelaren ansluta först och benåda sedan.",
+    "deathexile:punish.exile_end": "Din exil är över. Du dör och återvänder till spawn. Liv: {0}.",
+    "deathexile:punish.exile_remaining": "Återstående tid i exil: {0} tim {1} min.",
+    "deathexile:punish.exile_start": "Du har blivit förvisad till en avlägsen plats i {0} tim {1} min.",
+    "deathexile:punish.spectator_end": "Din tid som åskådare är över. Välkommen tillbaka till överlevnad. Liv: {0}.",
+    "deathexile:punish.spectator_remaining": "Återstående tid som åskådare: {0} tim {1} min.",
+    "deathexile:punish.spectator_start": "Du har slut på liv. Du kommer att vara åskådare i {0} tim {1} min.",
+    "lives.added": "Du har nu {0} liv.",
+    "lives.lost": "Du dog. Återstående liv: {0}.",
+    "logs.config_load_error": "Kunde inte läsa in konfigurationen! Standardinställningarna används i stället.",
+    "respawn.spectator": "Du har förlorat din fysiska kropp. Nu är du endast en observatör.",
+    "geartolife:command_response.lives": "Återstående liv: {0}."
+}

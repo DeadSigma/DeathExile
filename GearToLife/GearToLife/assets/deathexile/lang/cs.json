@@ -1,0 +1,20 @@
+{
+    "command_response.lives": "Zbývá životů: {0}.",
+    "deathexile:command_response.exile_set": "Místo vyhnanství nastaveno: {0}, {1}, {2}.",
+    "deathexile:command_response.pardon_done": "Trest hráče {0} byl ukončen.",
+    "deathexile:command_response.pardon_none": "{0} momentálně žádný trest nevykonává.",
+    "deathexile:command_response.pardon_notfound": "Hráč se jménem „{0}“ nebyl nalezen.",
+    "deathexile:command_response.pardon_offline": "{0} není online – trest bude ukončen při jeho příštím přihlášení.",
+    "deathexile:command_response.pardon_offline_unavailable": "{0} není online a jeho data nejsou načtena. Nechte ho připojit a poté udělte milost.",
+    "deathexile:punish.exile_end": "Tvé vyhnanství skončilo. Zemřeš a vrátíš se na spawn. Životy: {0}.",
+    "deathexile:punish.exile_remaining": "Zbývající čas vyhnanství: {0} h {1} min.",
+    "deathexile:punish.exile_start": "Byl jsi vyhoštěn na vzdálené místo na {0} h {1} min.",
+    "deathexile:punish.spectator_end": "Čas pozorovatele skončil. Vítej zpět v režimu přežití. Životy: {0}.",
+    "deathexile:punish.spectator_remaining": "Zbývající čas jako pozorovatel: {0} h {1} min.",
+    "deathexile:punish.spectator_start": "Došly ti životy. Budeš pozorovatelem po dobu {0} h {1} min.",
+    "lives.added": "Nyní máš {0} životů.",
+    "lives.lost": "Zemřel jsi. Zbývá ti {0} životů.",
+    "logs.config_load_error": "Nepodařilo se načíst konfiguraci! Místo ní budou použita výchozí nastavení.",
+    "respawn.spectator": "Ztratil jsi svou fyzickou schránku. Nyní jsi pouze pozorovatel.",
+    "geartolife:command_response.lives": "Zbývá životů: {0}."
+}

@@ -1,0 +1,9 @@
+{
+    "deathexile:punish.exile_end": "Выгнанне завершана. Ты паміраеш і вяртаешся на месца з'яўлення. Жыццяў: {0}.",
+    "deathexile:punish.exile_remaining": "Да заканчэння выгнання: {0} гадз. {1} хв.",
+    "deathexile:punish.exile_start": "Ты быў выгнаны ў далёкае месца на {0} гадз. {1} хв.",
+    "deathexile:punish.spectator_end": "Час назіральніка скончыўся. Сардэчна запрашаем назад у рэжым выжывання. Жыццяў: {0}.",
+    "deathexile:punish.spectator_remaining": "Да заканчэння рэжыму назіральніка: {0} гадз. {1} хв.",
+    "deathexile:punish.spectator_start": "У цябе скончыліся жыцці. Ты будзеш назіральнікам {0} гадз. {1} хв.",
+    "geartolife:command_response.lives": "Засталося жыццяў: {0}."
+}

@@ -1,0 +1,20 @@
+{
+    "command_response.lives": "剩余生命：{0}。",
+    "deathexile:command_response.exile_set": "放逐点已设置：{0}, {1}, {2}.",
+    "deathexile:command_response.pardon_done": "玩家 {0} 的惩罚已结束。",
+    "deathexile:command_response.pardon_none": "{0} 当前未在接受惩罚。",
+    "deathexile:command_response.pardon_notfound": "未找到名为“{0}”的玩家。",
+    "deathexile:command_response.pardon_offline": "{0} 当前离线——惩罚将在下次登录时结束。",
+    "deathexile:command_response.pardon_offline_unavailable": "{0} 当前离线，数据尚未加载。请先让其登录，再执行赦免。",
+    "deathexile:punish.exile_end": "你的流放结束了。你将死亡并返回出生点。生命：{0}.",
+    "deathexile:punish.exile_remaining": "流放剩余时间：{0} 小时 {1} 分钟。",
+    "deathexile:punish.exile_start": "你被流放到遥远之地，持续 {0} 小时 {1} 分钟。",
+    "deathexile:punish.spectator_end": "你的旁观时间已结束。欢迎回到生存模式。生命：{0}。",
+    "deathexile:punish.spectator_remaining": "旁观剩余时间：{0} 小时 {1} 分钟。",
+    "deathexile:punish.spectator_start": "你的生命已经耗尽。你将旁观 {0} 小时 {1} 分钟。",
+    "lives.added": "你现在拥有 {0} 条生命。",
+    "lives.lost": "你已死亡。剩余生命：{0}。",
+    "logs.config_load_error": "无法加载配置！将改为加载默认设置。",
+    "respawn.spectator": "你失去了肉体。现在你只是一个旁观者。",
+    "geartolife:command_response.lives": "剩余生命：{0}。"
+}

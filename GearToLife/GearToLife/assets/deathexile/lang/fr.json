@@ -1,0 +1,20 @@
+{
+    "command_response.lives": "Vies restantes : {0}.",
+    "deathexile:command_response.exile_set": "Point d'exil défini : {0}, {1}, {2}.",
+    "deathexile:command_response.pardon_done": "La punition du joueur {0} est terminée.",
+    "deathexile:command_response.pardon_none": "{0} ne purge actuellement aucune peine.",
+    "deathexile:command_response.pardon_notfound": "Aucun joueur nommé « {0} » n'a été trouvé.",
+    "deathexile:command_response.pardon_offline": "{0} est hors ligne : la punition prendra fin lors de sa prochaine connexion.",
+    "deathexile:command_response.pardon_offline_unavailable": "{0} est hors ligne et ses données ne sont pas chargées. Faites-le se connecter, puis accordez-lui le pardon.",
+    "deathexile:punish.exile_end": "Ton exil est terminé. Tu meurs et retournes au point d'apparition. Vies : {0}.",
+    "deathexile:punish.exile_remaining": "Temps restant en exil : {0} h {1} min.",
+    "deathexile:punish.exile_start": "Tu as été exilé dans un lieu lointain pendant {0} h {1} min.",
+    "deathexile:punish.spectator_end": "Ton temps de spectateur est terminé. Bon retour en mode survie. Vies : {0}.",
+    "deathexile:punish.spectator_remaining": "Temps restant en mode spectateur : {0} h {1} min.",
+    "deathexile:punish.spectator_start": "Tu n'as plus de vies. Tu seras spectateur pendant {0} h {1} min.",
+    "lives.added": "Tu as maintenant {0} vies.",
+    "lives.lost": "Tu es mort. Vies restantes : {0}.",
+    "logs.config_load_error": "Impossible de charger la configuration ! Les paramètres par défaut seront utilisés.",
+    "respawn.spectator": "Tu as perdu ton enveloppe physique. Tu n'es désormais qu'un observateur.",
+    "geartolife:command_response.lives": "Vies restantes : {0}."
+}

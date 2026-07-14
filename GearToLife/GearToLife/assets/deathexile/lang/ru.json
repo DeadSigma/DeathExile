@@ -1,0 +1,20 @@
+{
+    "deathexile:command_response.lives": "Осталось жизней: {0}.",
+    "deathexile:command_response.exile_set": "Точка изгнания установлена: {0}, {1}, {2}.",
+    "deathexile:command_response.pardon_done": "Наказание игрока {0} завершено.",
+    "deathexile:command_response.pardon_none": "{0} сейчас не отбывает наказание.",
+    "deathexile:command_response.pardon_notfound": "Игрок с именем «{0}» не найден.",
+    "deathexile:command_response.pardon_offline": "{0} не в сети - наказание завершится при следующем входе.",
+    "deathexile:command_response.pardon_offline_unavailable": "{0} не в сети, данные не загружены. Пусть зайдёт, затем помилуйте.",
+    "deathexile:punish.exile_end": "Изгнание завершено. Ты погибаешь и возвращаешься на спавн. Жизней: {0}.",
+    "deathexile:punish.exile_remaining": "До окончания изгнания: {0} ч. {1} мин.",
+    "deathexile:punish.exile_start": "Ты был изгнан в далёкое место на {0} ч. {1} мин.",
+    "deathexile:punish.spectator_end": "Время наблюдателя закончилось. Добро пожаловать обратно в выживание. Жизней: {0}.",
+    "deathexile:punish.spectator_remaining": "До окончания режима наблюдателя: {0} ч. {1} мин.",
+    "deathexile:punish.spectator_start": "У тебя закончились жизни. Ты будешь наблюдателем {0} ч. {1} мин.",
+    "deathexile:lives.added": "Теперь твое количество жизней: {0}.",
+    "deathexile:lives.lost": "Ты погиб. Жизней осталось: {0}.",
+    "deathexile:logs.config_load_error": "Не удалось загрузить конфигурацию! Вместо этого загружаются настройки по умолчанию.",
+    "deathexile:respawn.spectator": "Ты утратил физическую оболочку. Теперь ты лишь наблюдатель.",
+    "geartolife:command_response.lives": "Осталось жизней: {0}."
+}

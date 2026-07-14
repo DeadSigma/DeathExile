@@ -1,0 +1,20 @@
+{
+    "command_response.lives": "Lives remaining: {0}.",
+    "deathexile:command_response.exile_set": "Exile point set to: {0}, {1}, {2}.",
+    "deathexile:command_response.pardon_done": "Player {0}'s punishment has ended.",
+    "deathexile:command_response.pardon_none": "{0} is not currently serving a punishment.",
+    "deathexile:command_response.pardon_notfound": "Player named \"{0}\" was not found.",
+    "deathexile:command_response.pardon_offline": "{0} is offline — the punishment will end the next time they join.",
+    "deathexile:command_response.pardon_offline_unavailable": "{0} is offline and their data is not loaded. Have them join first, then pardon them.",
+    "deathexile:punish.exile_end": "Your exile is over. You die and return to spawn. Lives: {0}.",
+    "deathexile:punish.exile_remaining": "Time left in exile: {0}h {1}m.",
+    "deathexile:punish.exile_start": "You have been exiled to a distant place for {0}h {1}m.",
+    "deathexile:punish.spectator_end": "Your spectator time is over. Welcome back to survival. Lives: {0}.",
+    "deathexile:punish.spectator_remaining": "Time left in spectator: {0}h {1}m.",
+    "deathexile:punish.spectator_start": "You have run out of lives. You will spectate for {0}h {1}m.",
+    "lives.added": "You now have {0} lives.",
+    "lives.lost": "You died. Lives remaining: {0}.",
+    "logs.config_load_error": "Failed to load configuration! Default settings will be loaded instead.",
+    "respawn.spectator": "You have lost your physical form. You are now merely an observer.",
+    "geartolife:command_response.lives": "Lives remaining: {0}."
+}

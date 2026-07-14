@@ -1,0 +1,13 @@
+{
+    "type": "code",
+    "modid": "deathexile",
+    "name": "Death Exile",
+    "authors": [
+        "Dencher12", "El_Neuman"
+    ],
+    "description": "Using the temporal gear gives lives, spending all lives results in final death.",
+    "version": "1.1.1",
+    "dependencies": {
+        "game": ""
+    }
+}

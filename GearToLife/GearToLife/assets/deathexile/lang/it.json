@@ -1,0 +1,9 @@
+{
+    "deathexile:punish.exile_end": "Il tuo esilio è terminato. Muori e torni al punto di comparsa. Vite: {0}.",
+    "deathexile:punish.exile_remaining": "Tempo rimanente di esilio: {0} h {1} min.",
+    "deathexile:punish.exile_start": "Sei stato esiliato in un luogo lontano per {0} h {1} min.",
+    "deathexile:punish.spectator_end": "Il tempo da spettatore è terminato. Bentornato in modalità sopravvivenza. Vite: {0}.",
+    "deathexile:punish.spectator_remaining": "Tempo rimanente come spettatore: {0} h {1} min.",
+    "deathexile:punish.spectator_start": "Hai esaurito le vite. Rimarrai spettatore per {0} h {1} min.",
+    "geartolife:command_response.lives": "Vite rimanenti: {0}."
+}
