@@ -6,7 +6,7 @@ namespace DeathExile;
 [JsonConverter(typeof(StringEnumConverter))]
 public enum PunishmentMode
 {
-    PermanentSpectator, // спектатор навсегда (текущее поведение)
+    PermanentSpectator, // спектатор навсегда (изначальное поведение)
     TemporarySpectator, // спектатор на N часов, затем обратно в выживание
     Exile               // изгнание в заданную точку на N часов, затем смерть и спавн
 }
@@ -21,7 +21,7 @@ public class ModConfig
         "PunishmentMode options: " +
         "PermanentSpectator = spectator forever | " +
         "TemporarySpectator = spectator for SpectatorRealHours, then back to survival | " +
-        "Exile = teleport to ExileX/Y/Z for ExileRealHours, then die and respawn at normal spawn. /lives setexile - set the exile location for players";
+         "Exile = teleport to ExileX/Y/Z for ExileRealHours, then die and respawn at normal spawn. /lives setexile - set the exile location for players";
 
     public PunishmentMode PunishmentMode = PunishmentMode.PermanentSpectator;
 

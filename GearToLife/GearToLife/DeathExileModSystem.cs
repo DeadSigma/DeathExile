@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using HarmonyLib;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
-using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 
 namespace DeathExile;
@@ -14,6 +13,7 @@ public class DeathExileModSystem : ModSystem
     private static ModConfig Config { get; set; }
     private static ICoreServerAPI Api { get; set; }
 
+    private const string ConfigFile = "DeathExileConfig.json";
     private static readonly HashSet<string> EndingExile = new();
 
     private enum PunishState
@@ -34,12 +34,10 @@ public class DeathExileModSystem : ModSystem
 
         TryToLoadConfig(api);
 
-        // Предупреждаем админа, если выбран Exile, но точка не задана
-        if (Config.PunishmentMode == PunishmentMode.Exile
-            && (Config.ExileX <= 0 || Config.ExileY <= 0 || Config.ExileZ <= 0))
+        if (Config.PunishmentMode == PunishmentMode.Exile && !IsExilePointValid())
         {
             api.Logger.Warning("[deathexile] PunishmentMode = Exile, но координаты изгнания не заданы. "
-                + "Задайте ExileX/Y/Z в deathexileConfig.json или встаньте в нужном месте и вызовите /lives setexile, "
+                + "Задайте ExileX/Y/Z в " + ConfigFile + " или встаньте в нужном месте и вызовите /lives setexile, "
                 + "иначе изгнанные игроки останутся на обычном спавне.");
         }
 
@@ -47,8 +45,6 @@ public class DeathExileModSystem : ModSystem
         api.Event.PlayerRespawn += OnPlayerRespawn;
         api.Event.PlayerNowPlaying += OnPlayerNowPlaying;
 
-        // Раз в 10 секунд проверяем таймеры у онлайн-игроков:
-        // ежечасные сообщения об остатке и освобождение по истечении срока
         api.Event.RegisterGameTickListener(OnTick, 10000);
 
         api.ChatCommands
@@ -73,8 +69,8 @@ public class DeathExileModSystem : ModSystem
     {
         try
         {
-            Config = api.LoadModConfig<ModConfig>("deathexileConfig.json") ?? new ModConfig();
-            api.StoreModConfig(Config, "deathexileConfig.json");
+            Config = api.LoadModConfig<ModConfig>(ConfigFile) ?? new ModConfig();
+            api.StoreModConfig(Config, ConfigFile);
         }
         catch (Exception e)
         {
@@ -107,7 +103,6 @@ public class DeathExileModSystem : ModSystem
         return TextCommandResult.Success(message);
     }
 
-    // Админ: завершить наказание игрока так, будто его срок истёк
     private static TextCommandResult OnPardonCommand(TextCommandCallingArgs args)
     {
         if (Config == null) return TextCommandResult.Error("Config not loaded.");
@@ -118,7 +113,6 @@ public class DeathExileModSystem : ModSystem
             return TextCommandResult.Error(Lang.Get("deathexile:command_response.pardon_notfound", name ?? ""));
         }
 
-        // Сначала ищем онлайн
         IServerPlayer target = null;
         bool online = false;
         foreach (var p in Api.World.AllOnlinePlayers)
@@ -131,7 +125,6 @@ public class DeathExileModSystem : ModSystem
             }
         }
 
-        // Иначе разрешаем по последнему известному имени и грузим объект игрока
         if (target == null)
         {
             var data = Api.PlayerData.GetPlayerDataByLastKnownName(name);
@@ -149,24 +142,21 @@ public class DeathExileModSystem : ModSystem
 
         var state = GetPunishState(target);
 
-        // Временное наказание (спектатор/изгнание) - истекаем как по таймеру
         if (state == PunishState.TemporarySpectator || state == PunishState.Exile)
         {
             ExpirePunishment(target);
 
             if (online)
             {
-                CheckPunishment(target, notifyNow: false); // завершится прямо сейчас
+                CheckPunishment(target, notifyNow: false);
                 Api.Logger.Notification("[deathexile] {0} pardoned (online).", name);
                 return TextCommandResult.Success(Lang.Get("deathexile:command_response.pardon_done", name));
             }
 
-            // Оффлайн: завершится при следующем входе - идентично реальному истечению
             Api.Logger.Notification("[deathexile] {0} pardoned (offline, ends on login).", name);
             return TextCommandResult.Success(Lang.Get("deathexile:command_response.pardon_offline", name));
         }
 
-        // Пожизненный спектатор (нет метки состояния): в спектаторе и без жизней.
         if (IsPermanentlyBanned(target))
         {
             PardonPermanent(target);
@@ -174,11 +164,9 @@ public class DeathExileModSystem : ModSystem
             return TextCommandResult.Success(Lang.Get("deathexile:command_response.pardon_done", name));
         }
 
-        //Нечего завершать
         return TextCommandResult.Error(Lang.Get("deathexile:command_response.pardon_none", name));
     }
 
-    // Админ: записать точку изгнания = текущая позиция вызывающего
     private static TextCommandResult OnSetExileCommand(TextCommandCallingArgs args)
     {
         if (args.Caller.Player is not IServerPlayer player)
@@ -192,7 +180,7 @@ public class DeathExileModSystem : ModSystem
         Config.ExileY = pos.Y;
         Config.ExileZ = pos.Z;
 
-        Api.StoreModConfig(Config, "deathexileConfig.json");
+        Api.StoreModConfig(Config, ConfigFile);
         Api.Logger.Notification("[deathexile] Exile point set to {0:0}, {1:0}, {2:0} by {3}.",
             pos.X, pos.Y, pos.Z, player.PlayerName);
 
@@ -201,7 +189,6 @@ public class DeathExileModSystem : ModSystem
     }
 
     // Жизни
-
     private static int GetLives(IServerPlayer player)
     {
         return player.WorldData.GetModData("deathexile:lives", Config.InitialLivesAmount);
@@ -214,8 +201,6 @@ public class DeathExileModSystem : ModSystem
 
     public static void AddLife(IServerPlayer player)
     {
-        // Во время наказания жизни не начисляем - иначе шестерёнка, использованная в изгнании, дала бы жизнь, которая всё равно сотрётся при сбросе счётчика
-
         if (GetPunishState(player) != PunishState.None) return;
 
         var newLives = GetLives(player) + Config.LivesPerGear;
@@ -248,12 +233,8 @@ public class DeathExileModSystem : ModSystem
 
     private static void OnPlayerRespawn(IServerPlayer player)
     {
-        // Респавн после завершения изгнания: игрок вернулся на обычный спавн со сброшенным счётчиком жизней - больше делать нечего
-
         if (EndingExile.Remove(player.PlayerUID)) return;
 
-        // Игрок умер, УЖЕ отбывая наказание. Возвращаем его в наказание, не сбрасывая таймер, чтобы нельзя было сбежать/обнулить срок смертью
-        
         var state = GetPunishState(player);
         if (state != PunishState.None)
         {
@@ -261,17 +242,20 @@ public class DeathExileModSystem : ModSystem
             return;
         }
 
-        // Жизни ещё есть - обычный респавн.
         if (GetLives(player) > 0) return;
 
-        // Жизни кончились - запускаем наказание из конфига.
         StartPunishment(player);
     }
 
     private static void OnPlayerNowPlaying(IServerPlayer player)
     {
-        // Пересчёт при заходе. Если срок вышел, пока игрок был оффлайн, -
-        // освобождаем сейчас; иначе показываем, сколько осталось.
+        // Переутверждаем точку спавна изгнанника при входе: конфиг мог поменяться,
+        // или спавн мог быть сброшен чем-то ещё, пока игрок был не в сети
+        if (GetPunishState(player) == PunishState.Exile)
+        {
+            SetExileSpawn(player);
+        }
+
         CheckPunishment(player, notifyNow: true);
     }
 
@@ -308,14 +292,15 @@ public class DeathExileModSystem : ModSystem
             case PunishmentMode.Exile:
                 StampPunishment(player, PunishState.Exile);
                 SetExileMovement(player);
-                TeleportToExile(player);
+                SetExileSpawn(player);   // все будущие смерти вернут сюда же
+                TeleportToExile(player); // первичное перемещение: игрок сейчас жив
                 NotifyRemaining(player, PunishState.Exile, "deathexile:punish.exile_start");
                 break;
         }
     }
 
-    // Игрок умер, уже отбывая наказание: возвращаем режим движения/позицию, не трогая метку времени
-    
+    // Игрок умер, уже отбывая наказание. Метку времени НЕ трогаем, чтобы срок
+    // нельзя было обнулить смертью
     private static void ReapplyPunishment(IServerPlayer player, PunishState state)
     {
         switch (state)
@@ -326,12 +311,11 @@ public class DeathExileModSystem : ModSystem
 
             case PunishState.Exile:
                 SetExileMovement(player);
-                TeleportToExile(player);
+                SetExileSpawn(player);   // переутверждаем на случай, если спавн сбросили
+                TeleportToExile(player); // страховка, если движок всё же поставил на общий спавн
                 break;
         }
     }
-
-    // Главная проверка: сравнивает "сейчас" с сохранённой меткой. Освобождает по истечении срока; иначе (раз в час) пишет остаток
 
     private static void CheckPunishment(IServerPlayer player, bool notifyNow)
     {
@@ -346,9 +330,6 @@ public class DeathExileModSystem : ModSystem
             return;
         }
 
-        // Ежечасные сообщения: печатаем при смене номера часа-остатка.
-        // Метку последнего показанного часа храним в памяти игрока, поэтому после перезахода не спамим повтором за тот же час.
-
         int hoursLeft = (int)Math.Ceiling(remaining.TotalHours);
         int lastShown = player.WorldData.GetModData("deathexile:punish_lasthour", -1);
 
@@ -361,34 +342,30 @@ public class DeathExileModSystem : ModSystem
 
     private static void EndPunishment(IServerPlayer player, PunishState state)
     {
+        // Сначала сбрасываем состояние: это заодно отменяет любой "висящий"
+        // отложенный телепорт (он проверяет состояние перед срабатыванием)
         ClearPunishment(player);
 
         switch (state)
         {
             case PunishState.TemporarySpectator:
-                // Обратно в выживание + СБРОС счётчика: игрок начинает копить наказание заново, как будто только зашёл на сервер
-                // 
                 SetSurvival(player);
                 SetLives(player, Config.InitialLivesAmount);
                 Notify(player, "deathexile:punish.spectator_end", GetLives(player));
                 break;
 
             case PunishState.Exile:
-                // Помечаем, что убиваем ЭТОГО игрока намеренно, - чтобы
-                // OnPlayerDeath не снял жизнь, а OnPlayerRespawn не запустил
-                // наказание заново
                 EndingExile.Add(player.PlayerUID);
 
-                // Сбрасываем счётчик ЗАРАНЕЕ, до смерти
-                SetLives(player, Config.InitialLivesAmount);
+                // Убираем спавн изгнания ДО смерти, иначе Die() вернёт
+                // игрока обратно в изгнание вместо обычного спавна
+                ClearExileSpawn(player);
 
-                // Возвращаем нормальный режим движения ДО смерти, чтобы после
-                // респавна на спавне игрок не остался с "изгнанническими" флагами
+                SetLives(player, Config.InitialLivesAmount);
                 SetSurvival(player);
 
                 Notify(player, "deathexile:punish.exile_end", GetLives(player));
 
-                // Убиваем - ванильный респавн вернёт игрока на обычный спавн
                 player.Entity?.Die(EnumDespawnReason.Death, new DamageSource
                 {
                     Source = EnumDamageSource.Unknown,
@@ -398,20 +375,14 @@ public class DeathExileModSystem : ModSystem
         }
     }
 
-    // Помилование
+    // Помилование (админ)
 
-    // Двигаем метку старта далеко в прошлое, чтобы RemainingTime стал <= 0
-    // при любой настроенной длительности. Дальше обычный CheckPunishment завершает
-    // наказание штатно (онлайн - сейчас, оффлайн - при входе; как реальное истечение)
     private static void ExpirePunishment(IServerPlayer player)
     {
         player.WorldData.SetModData("deathexile:punish_startticks", 1L);
         player.WorldData.SetModData("deathexile:punish_lasthour", -1);
     }
 
-    // Пожизненный бан не имеет метки состояния: игрок застрял в спектаторе без жизней
-    // Обычный админ-наблюдатель держит жизни > 0, поэтому ложных срабатываний нет,
-    // пока InitialLivesAmount >= 1
     private static bool IsPermanentlyBanned(IServerPlayer player)
     {
         return player.WorldData.CurrentGameMode == EnumGameMode.Spectator
@@ -443,8 +414,6 @@ public class DeathExileModSystem : ModSystem
         player.BroadcastPlayerData();
     }
 
-    // Изгнанник остаётся в выживании (может умирать, есть, мёрзнуть - это часть
-    // наказания), но без NoClip/FreeMove.
     private static void SetExileMovement(IServerPlayer player)
     {
         player.WorldData.CurrentGameMode = EnumGameMode.Survival;
@@ -453,29 +422,57 @@ public class DeathExileModSystem : ModSystem
         player.BroadcastPlayerData();
     }
 
-    // Телепорт в заданную админом точку. Отложен на ~300 мс, чтобы движок,
-    // ставящий игрока на точку спавна при респавне, не перебил наш телепорт
-    // (иначе игрок то в изгнании, то на нормальном спавне - та самая "неоднородность")
-    private static void TeleportToExile(IServerPlayer player)
+    // Точка изгнания
+
+    private static bool IsExilePointValid()
     {
         double x = Config.ExileX, y = Config.ExileY, z = Config.ExileZ;
         var mapSize = Api.World.BlockAccessor.MapSize;
 
-        bool valid = x > 0 && y > 0 && z > 0
+        return x > 0 && y > 0 && z > 0
             && x < mapSize.X && y < mapSize.Y && z < mapSize.Z;
+    }
 
-        if (!valid)
+    // ОСНОВНОЙ механизм: движок сам ставит игрока сюда при смерти. Никаких гонок
+    // с движком, в отличие от телепорта после респавна.
+    private static void SetExileSpawn(IServerPlayer player)
+    {
+        if (!IsExilePointValid()) return;
+
+        player.SetSpawnPosition(new PlayerSpawnPos
         {
-            Api.Logger.Warning("[deathexile] Координаты изгнания ({0:0},{1:0},{2:0}) не заданы или вне карты - "
-                + "{3} оставлен на обычном спавне. Задайте ExileX/Y/Z в конфиге или вызовите /lives setexile.",
-                x, y, z, player.PlayerName);
+            x = (int)Config.ExileX,
+            y = (int)Config.ExileY,
+            z = (int)Config.ExileZ,
+            yaw = 0,
+            pitch = 0,
+            RemainingUses = 999999
+        });
+    }
+
+    // Возврат к ванильному спавну (мировой спавн / кровать)
+    private static void ClearExileSpawn(IServerPlayer player)
+    {
+        player.ClearSpawnPosition();
+    }
+
+    // Теперь это лишь СТРАХОВКА и первичное перемещение живого игрока
+    // Основную работу делает SetExileSpawn
+    private static void TeleportToExile(IServerPlayer player)
+    {
+        if (!IsExilePointValid())
+        {
+            Api.Logger.Warning("[deathexile] Координаты изгнания не заданы или вне карты - "
+                + "{0} оставлен на обычном спавне. Вызовите /lives setexile.", player.PlayerName);
             return;
         }
+
+        double x = Config.ExileX, y = Config.ExileY, z = Config.ExileZ;
 
         Api.Event.RegisterCallback(dt =>
         {
             if (player?.Entity == null) return;
-            // Если за время задержки игрока помиловали/освободили - не телепортируем
+            // Помиловали за время задержки - не телепортируем.
             if (GetPunishState(player) != PunishState.Exile) return;
             player.Entity.TeleportToDouble(x, y, z);
         }, 300);
@@ -483,9 +480,6 @@ public class DeathExileModSystem : ModSystem
 
     // Хранение метки времени в памяти игрока
 
-    // Записываем момент начала наказания как абсолютный UtcNow.Ticks. Всё
-    // остальное - производная от разницы с текущим временем, поэтому отсчёт
-    // идёт в реальном времени и переживает выход игрока и рестарт сервера
     private static void StampPunishment(IServerPlayer player, PunishState state)
     {
         player.WorldData.SetModData("deathexile:punish_state", (int)state);

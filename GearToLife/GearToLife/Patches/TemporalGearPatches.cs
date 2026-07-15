@@ -1,12 +1,10 @@
-﻿using DeathExile;
-using HarmonyLib;
+﻿using HarmonyLib;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
-using Vintagestory.API.Config;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 
-namespace deathexile.Patches;
+namespace DeathExile.Patches;
 
 [HarmonyPatchCategory("deathexile")]
 internal static class TemporalGearPatches
@@ -15,7 +13,7 @@ internal static class TemporalGearPatches
     [HarmonyPatch(typeof(ItemTemporalGear), "OnHeldInteractStop")]
     public static void AfterUsingGear(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
     {
-        if 
+        if
         (
             byEntity.World.Side != EnumAppSide.Server ||
             byEntity is not EntityPlayer entityPlayer ||
